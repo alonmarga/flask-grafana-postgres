@@ -43,18 +43,18 @@ services:
     volumes:
       - grafana:/var/lib/grafana
 
-  flask_app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: flask_app
-    restart: always
-    ports:
-      - "5000:5000"
-    depends_on:
-      - grafana
+  # flask_app:
+  #   build:
+  #     context: ./flask-grafana-postgres/flask
+  #     dockerfile: ./flask-grafana-postgres/flask/Dockerfile
+  #   container_name: flask_app
+  #   restart: always
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - grafana
 
-      
+
 volumes:
   pg_grafana:
     driver: local
