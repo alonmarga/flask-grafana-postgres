@@ -38,21 +38,27 @@ services:
     restart: unless-stopped
     depends_on:
         - pg_grafana
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+         
     ports:
       - 3111:3000
     volumes:
       - grafana:/var/lib/grafana
 
-  # flask_app:
-  #   build:
-  #     context: ./flask-grafana-postgres/flask
-  #     dockerfile: ./flask-grafana-postgres/flask/Dockerfile
-  #   container_name: flask_app
-  #   restart: always
-  #   ports:
-  #     - "5000:5000"
-  #   depends_on:
-  #     - grafana
+  flask_app:
+    build:
+      context: ../flask
+      dockerfile: ./Dockerfile
+    container_name: flask_app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - grafana
 
 
 volumes:
