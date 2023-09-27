@@ -59,6 +59,9 @@ services:
       - "5000:5000"
     depends_on:
       - grafana
+    volumes:
+      - C:\Python_projects\flask-grafana-postgres\flask:/app:rw
+
 
 
 volumes:
